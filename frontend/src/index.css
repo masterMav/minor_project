@@ -262,7 +262,7 @@ button.submit:hover {
   position: fixed;
   height: 100%;
   width: 50%;
-  top: 21%;
+  top: 18%;
   left: 50%;
   transform: translate(-50%);
 }
@@ -284,11 +284,32 @@ button.submit:hover {
   background-color: #f1356d;
 }
 
-.treeImage {
+.cfLogo {
   position: absolute;
-  opacity: 0.4;
-  top: 35%;
-  left: 1%;
+  opacity: 1;
+  top: 69%;
+  left: 4%;
+}
+
+.atcoder {
+  position: absolute;
+  opacity: 1;
+  top: 67%;
+  left: 35%;
+}
+
+.cc {
+  position: absolute;
+  opacity: 1;
+  top: 66.5%;
+  left: 55%;
+}
+
+.icpc {
+  position: absolute;
+  opacity: 1;
+  top: 64%;
+  left: 74%;
 }
 
 .homeFooter {
