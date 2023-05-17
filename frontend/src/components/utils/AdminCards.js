@@ -1,16 +1,16 @@
-const AdminCards = ({ noOfUsers, avgTime, avgAttempts }) => {
+const AdminCards = ({ totalSolved, contestSolves, wa }) => {
   return (
-    <div className="AdminCards mx-5 px-5 mt-5">
+    <div className="AdminCards mt-3">
       <div className="row d-flex justify-content-center">
         {/* User card */}
         <div className="col-xl-3 col-lg-6">
           <div className="card l-bg-cherry">
             <div className="card-statistic-3 p-4">
               <div className="mb-4">
-                <h5 className="card-title mb-0">Total Number of Users</h5>
+                <h5 className="card-title mb-0">Total Solved</h5>
               </div>
               <div className="col-8">
-                <h2 className="d-flex align-items-center mb-0">{noOfUsers}</h2>
+                <h2 className="d-flex align-items-center mb-0">{totalSolved}</h2>
               </div>
             </div>
           </div>
@@ -21,10 +21,10 @@ const AdminCards = ({ noOfUsers, avgTime, avgAttempts }) => {
           <div className="card l-bg-blue-dark">
             <div className="card-statistic-3 p-4">
               <div className="mb-4">
-                <h5 className="card-title mb-0">Avg Time Spent.</h5>
+                <h5 className="card-title mb-0">Contest solves</h5>
               </div>
               <div className="col-8">
-                <h2 className="d-flex align-items-center mb-0">{avgTime} sec</h2>
+                <h2 className="d-flex align-items-center mb-0">{contestSolves}</h2>
               </div>
             </div>
           </div>
@@ -35,11 +35,11 @@ const AdminCards = ({ noOfUsers, avgTime, avgAttempts }) => {
           <div className="card l-bg-green-dark">
             <div className="card-statistic-3 p-4">
               <div className="mb-4">
-                <h5 className="card-title mb-0">Avg. attempts per level.</h5>
+                <h5 className="card-title mb-0">Wrong attempts</h5>
               </div>
               <div className="col-8">
                 <h2 className="d-flex align-items-center mb-0">
-                  {avgAttempts}
+                  {wa}
                 </h2>
               </div>
             </div>

@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import RatingFrequency from "./utils/RatingFrequency";
+import TagsFrequency from "./utils/TagsFrequency";
+import AdminCards from "./utils/AdminCards";
 import {
   calcRatingDistribution,
   calcTagsDistribution,
+  calcTotalSolved,
+  calcContestSolves,
+  calcWA,
 } from "./utils/userUtils";
-import TagsFrequency from "./utils/TagsFrequency";
 
 function Userdashboard() {
   const [rating, setRating] = useState("");
@@ -17,6 +21,9 @@ function Userdashboard() {
   const [error, setError] = useState("");
   const [ratingWise, setRatingWise] = useState([]);
   const [tagWise, setTagWise] = useState([]);
+  const [totalSolved, setTotalSolved] = useState("");
+  const [contestSolves, setContestSolves] = useState("");
+  const [wa, setWa] = useState("");
 
   // #
   const handle = "everule";
@@ -51,6 +58,9 @@ function Userdashboard() {
       .then((data) => {
         setRatingWise(calcRatingDistribution(data.result));
         setTagWise(calcTagsDistribution(data.result));
+        setTotalSolved(calcTotalSolved(data.result));
+        setContestSolves(calcContestSolves(data.result));
+        setWa(calcWA(data.result));
       })
       .catch((err) => setError(err.message));
   }, []);
@@ -59,7 +69,7 @@ function Userdashboard() {
     <div className="d-flex">
       {/* Sidebar */}
 
-      <div className="d-flex justify-content-end mt-5" style={{ width: "20%" }}>
+      <div className="d-flex justify-content-end mt-3" style={{ width: "20%" }}>
         {/* User info card */}
 
         <div className="card" style={{ width: "17rem" }}>
@@ -70,6 +80,12 @@ function Userdashboard() {
           />
           <div className="card-body">
             <div className="card-text">
+              <div className="d-inline-flex">
+                <p className="fw-bold me-2">User:</p>
+                {handle}
+              </div>
+              <br />
+
               <div className="d-inline-flex">
                 <p className="fw-bold me-2">Rating:</p>
                 {rating}
@@ -119,18 +135,26 @@ function Userdashboard() {
           </div>
         )}
 
+        {totalSolved && (
+          <AdminCards
+            totalSolved={totalSolved}
+            contestSolves={contestSolves}
+            wa={wa}
+          />
+        )}
+
         {/* Plot graphs */}
 
-        <div className="row justify-content-center mt-5">
-          <div className="col-5 text-center p-3 me-2 card custom-card">
-            <div class="card-body text-center">
+        <div className="row justify-content-center">
+          <div className="col-5 text-center p-3 me-4 card custom-card">
+            <div className="card-body text-center">
               <h2>Frequency Vs Ratings</h2>
               {ratingWise.length !== 0 && <RatingFrequency data={ratingWise} />}
             </div>
           </div>
 
           <div className="col-5 text-center p-3 card custom-card">
-            <div class="card-body text-center">
+            <div className="card-body text-center">
               <h2>Frequency Vs Tags</h2>
               {tagWise.length !== 0 && <TagsFrequency data={tagWise} />}
             </div>

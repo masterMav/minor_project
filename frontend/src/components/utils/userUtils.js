@@ -55,3 +55,36 @@ export function calcTagsDistribution(subs) {
   }
   return arr;
 }
+
+export function calcTotalSolved(subs) {
+
+  let ans = 0;
+  subs.forEach((sub) => {
+    if (sub.verdict !== "OK") return;
+    ans++;
+  });
+
+  return ans;
+}
+
+export function calcContestSolves(subs) {
+
+  let ans = 0;
+  subs.forEach((sub) => {
+    if (sub.verdict !== "OK" || sub.author.participantType !== "CONTESTANT") return;
+    ans++;
+  });
+
+  return ans;
+}
+
+export function calcWA(subs) {
+
+  let ans = 0;
+  subs.forEach((sub) => {
+    if (sub.verdict !== "WRONG_ANSWER") return;
+    ans++;
+  });
+
+  return ans;
+}
