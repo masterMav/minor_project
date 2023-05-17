@@ -13,6 +13,8 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     password: { type: String, required: true },
+    rank: { type: String, required: false },
+    rating: { type: Number, required: false },
     qns: {
       type: Array,
       required: false,

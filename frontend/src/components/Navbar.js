@@ -30,6 +30,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         >
           About{" "}
         </Link>
+        <Link to="/leaderboard">Leaderboard </Link>
 
         {/* Login or logout */}
         {isAuthenticated ? (

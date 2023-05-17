@@ -8,6 +8,7 @@ import {
   calcTotalSolved,
   calcContestSolves,
   calcWA,
+  updateRank,
 } from "./utils/userUtils";
 
 function Userdashboard() {
@@ -38,6 +39,7 @@ function Userdashboard() {
         return res.json();
       })
       .then((data) => {
+        // get data
         setRating(data.result[0].rating);
         setFriends(data.result[0].friendOfCount);
         setContribution(data.result[0].contribution);
@@ -45,6 +47,9 @@ function Userdashboard() {
         setMaxrating(data.result[0].maxRating);
         setMaxrank(data.result[0].maxRank);
         setAvatar(data.result[0].titlePhoto);
+
+        // update rank in backend for leaderboard.
+        updateRank(data.result[0].rank, data.result[0].rating);
       })
       .catch((err) => setError(err.message));
 

@@ -9,6 +9,7 @@ import Admin from "./components/Admin";
 import ProtectedRoute from "./ProtectedRoute";
 import { useState } from "react";
 import Userdashboard from "./components/Userdashboard";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
   // isAuthenticated prevents unwanted redirects to home when the user is already logged in.
@@ -36,6 +37,10 @@ function App() {
 
           <Route exact path="/create">
             <Create />
+          </Route>
+
+          <Route exact path="/leaderboard">
+            <Leaderboard />
           </Route>
 
           <ProtectedRoute

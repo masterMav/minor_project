@@ -30,23 +30,21 @@ export function calcRatingDistribution(subs) {
 }
 
 export function calcTagsDistribution(subs) {
-
   const mp = new Map([
     ["data structures", 0],
     ["strings", 0],
     ["dp", 0],
     ["greedy", 0],
     ["graphs", 0],
-    ["trees", 0]
+    ["trees", 0],
   ]);
 
   subs.forEach((sub) => {
     if (sub.verdict !== "OK" || sub.problem.rating === undefined) return;
 
     sub.problem.tags.forEach((tag) => {
-      if(mp.has(tag))
-        mp.set(tag, mp.get(tag) + 1);
-    })
+      if (mp.has(tag)) mp.set(tag, mp.get(tag) + 1);
+    });
   });
 
   let arr = [];
@@ -57,7 +55,6 @@ export function calcTagsDistribution(subs) {
 }
 
 export function calcTotalSolved(subs) {
-
   let ans = 0;
   subs.forEach((sub) => {
     if (sub.verdict !== "OK") return;
@@ -68,10 +65,10 @@ export function calcTotalSolved(subs) {
 }
 
 export function calcContestSolves(subs) {
-
   let ans = 0;
   subs.forEach((sub) => {
-    if (sub.verdict !== "OK" || sub.author.participantType !== "CONTESTANT") return;
+    if (sub.verdict !== "OK" || sub.author.participantType !== "CONTESTANT")
+      return;
     ans++;
   });
 
@@ -79,7 +76,6 @@ export function calcContestSolves(subs) {
 }
 
 export function calcWA(subs) {
-
   let ans = 0;
   subs.forEach((sub) => {
     if (sub.verdict !== "WRONG_ANSWER") return;
@@ -87,4 +83,29 @@ export function calcWA(subs) {
   });
 
   return ans;
+}
+
+export function updateRank(rank, rating) {
+  // retrive token
+  const token = localStorage.getItem("token");
+
+  fetch("http://localhost:5000/api/updaterank", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token, rank, rating }),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((result) => {
+      // After recieving & parsing server reponse.
+      if (result.status === "error") {
+        throw result.error;
+      }
+      console.log("rank updated successfully");
+    })
+    .catch((err) => {
+      // Internal server error.
+      console.log(err);
+    });
 }

@@ -1,6 +1,5 @@
 import AdminNavbar from "./utils/AdminNavbar";
 import AdminCards from "./utils/AdminCards";
-import Leaderboard from "./utils/Leaderboard";
 import { useState, useEffect } from "react";
 import {
   calculateAvgTime,
@@ -84,7 +83,6 @@ const Admin = () => {
         </div>
       </div>
 
-      {ranklist && <Leaderboard usersList={ranklist} />}
     </div>
   );
 };

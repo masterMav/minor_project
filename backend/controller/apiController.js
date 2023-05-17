@@ -123,8 +123,8 @@ const sendEmail = async (req, res) => {
   }
 };
 
-const updateGamedata = async (req, res) => {
-  const { token, gamedata } = req.body;
+const updateRank = async (req, res) => {
+  const { token, rank, rating } = req.body;
 
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
@@ -133,7 +133,7 @@ const updateGamedata = async (req, res) => {
     await User.updateOne(
       { _id },
       {
-        $set: { gamedata },
+        $set: { rank: rank, rating: rating },
       }
     );
     res.json({ status: "ok" });
@@ -143,34 +143,18 @@ const updateGamedata = async (req, res) => {
   }
 };
 
-const getGamedata = async (req, res) => {
-  const { token } = req.body;
+const getRanklist = async (req, res) => {
+  User.find({ rank: { $exists: true } }, "username rank rating")
+    .then((users) => {
+      // _id, username, rank & rating successfully fetched from DB.
 
-  try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
+      res.json({ status: "ok", users });
+    })
+    .catch((err) => {
+      // fetching errors.
 
-    // Verify admin
-    if (user.id === process.env.ADMIN_ID) {
-      // Verified now fetch data from DB.
-
-      User.find({ gamedata: { $exists: true, $ne: [] } }, "username gamedata")
-        .then((users) => {
-          // _id, username & gamedata successfully fetched from DB.
-
-          res.json({ status: "ok", users });
-        })
-        .catch((err) => {
-          // fetching errors.
-
-          console.error(err);
-        });
-    } else throw new Error();
-  } catch (error) {
-    // Invalid token
-
-    res.json({ status: "error", error: "Invalid signature." });
-    console.log(error);
-  }
+      console.error(err);
+    });
 };
 
 module.exports = {
@@ -178,6 +162,6 @@ module.exports = {
   login,
   changePassword,
   sendEmail,
-  updateGamedata,
-  getGamedata,
+  updateRank,
+  getRanklist,
 };
