@@ -18,7 +18,7 @@ const Login = ({ setIsAuthenticated }) => {
 
     // send login request to backend.
 
-    fetch("http://localhost:5000/api/login", {
+    fetch("https://minor-project-cxop.onrender.com/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

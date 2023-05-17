@@ -26,7 +26,7 @@ const Register = () => {
 
     // request node backend to send verification emails
 
-    fetch("http://localhost:5000/api/send-email", {
+    fetch("https://minor-project-cxop.onrender.com/api/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, OTP }),

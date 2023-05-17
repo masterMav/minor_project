@@ -89,7 +89,7 @@ export function updateRank(rank, rating) {
   // retrive token
   const token = localStorage.getItem("token");
 
-  fetch("http://localhost:5000/api/updaterank", {
+  fetch("https://minor-project-cxop.onrender.com/api/updaterank", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token, rank, rating }),

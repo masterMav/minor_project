@@ -8,7 +8,7 @@ function Leaderboard() {
   useEffect(() => {
     setError("");
 
-    fetch("http://localhost:5000/api/ranklist")
+    fetch("https://minor-project-cxop.onrender.com/api/ranklist")
       .then((res) => {
         return res.json();
       })

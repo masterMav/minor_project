@@ -99,14 +99,14 @@ const sendEmail = async (req, res) => {
     const options = {
       from: process.env.SRC_EMAIL,
       to: email,
-      subject: "[OTP] Email verify for finn's adventure.",
+      subject: "[OTP] Email verification.",
       html: `<p>Dear User,</p>
       <p>Your one-time verification code is <b>${OTP}</b>.</p>
       <p>Please enter this code on the verification page to complete the process.</p>
       <p>Please do not share this code with anyone for security purposes.</p>
       <p>Thank you for using our services.</p>
       <p>Best regards,</p>
-      <p>Manavkumar Patel</p>`,
+      <p>Minor project Group.</p>`,
     };
 
     transporter.sendMail(options, (err, info) => {
