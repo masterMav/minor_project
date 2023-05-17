@@ -9,6 +9,7 @@ router.post("/change-password", apiController.changePassword);
 router.post("/send-email", apiController.sendEmail);
 router.post("/updaterank", apiController.updateRank);
 router.post("/assign", apiController.assign);
+router.post("/getasg", apiController.getasg);
 router.get("/ranklist", apiController.getRanklist);
 router.get("/admindata", apiController.admindata);
 module.exports = router;

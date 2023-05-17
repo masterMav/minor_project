@@ -10,7 +10,7 @@ function Admin() {
   const [avgRating, setAvgRating] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/admindata")
+    fetch("https://minor-project-cxop.onrender.com/api/admindata")
       .then((res) => {
         return res.json();
       })
@@ -39,7 +39,7 @@ function Admin() {
 
     // Post request to backend.
 
-    fetch("http://localhost:5000/api/assign", {
+    fetch("https://minor-project-cxop.onrender.com/api/assign", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ qn }),

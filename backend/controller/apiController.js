@@ -204,6 +204,36 @@ const admindata = async (req, res) => {
     });
 };
 
+const getasg = async (req, res) => {
+  const { token } = req.body;
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+
+    User.findById(user.id)
+      .then((user) => {
+        if (user) {
+          // Document found
+
+          res.json({ status: "ok", data: user.qns });
+        } else {
+          // Document not found
+
+          throw new Error("User not found");
+        }
+      })
+      .catch((error) => {
+        // Error occurred
+
+        console.log(error);
+        res.json({ status: "error", error: "Internal Server Error." });
+      });
+  } catch (error) {
+    res.json({ status: "error", error: "Internal Server Error." });
+    console.log(error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -213,4 +243,5 @@ module.exports = {
   getRanklist,
   assign,
   admindata,
+  getasg,
 };

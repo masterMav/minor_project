@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import RatingFrequency from "./utils/RatingFrequency";
 import TagsFrequency from "./utils/TagsFrequency";
 import AdminCards from "./utils/AdminCards";
+import AsgList from "./utils/AsgList";
 import {
   calcRatingDistribution,
   calcTagsDistribution,
@@ -26,6 +27,7 @@ function Userdashboard() {
   const [totalSolved, setTotalSolved] = useState("");
   const [contestSolves, setContestSolves] = useState("");
   const [wa, setWa] = useState("");
+  const [asg, setAsg] = useState([]);
 
   const location = useLocation();
   let handle;
@@ -74,6 +76,28 @@ function Userdashboard() {
         setWa(calcWA(data.result));
       })
       .catch((err) => setError(err.message));
+
+    // Get assignments
+
+    const token = localStorage.getItem("token");
+
+    fetch("https://minor-project-cxop.onrender.com/api/getasg", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((result) => {
+        if (result.status === "error") {
+          throw result.error;
+        }
+        setAsg(result.data);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, []);
 
   return (
@@ -135,6 +159,7 @@ function Userdashboard() {
           </div>
         </div>
       </div>
+
       {/* Main menu */}
 
       <div style={{ width: "80%" }}>
@@ -171,6 +196,10 @@ function Userdashboard() {
             </div>
           </div>
         </div>
+
+        {/* Assignments */}
+
+        {asg.length !== 0 && <AsgList asgslist={asg} />}
       </div>
     </div>
   );
