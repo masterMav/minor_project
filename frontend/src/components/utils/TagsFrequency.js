@@ -66,21 +66,22 @@ const TagsFrequency = ({ data }) => {
     const yAxis = d3.axisLeft(yScale);
     svg.append("g").call(yAxis);
 
-        // Create y-axis label
-        svg
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2)
-        .attr("y", -margin.left)
-        .attr("dy", ".7em")
-        .style("text-anchor", "middle")
-        .text("Frequency");
+    // Create y-axis label
+    svg
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height / 2)
+      .attr("y", -margin.left)
+      .attr("dy", ".7em")
+      .style("text-anchor", "middle")
+      .text("Frequency");
 
     return () => {
       // Clean up the SVG element when the component unmounts
-
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       d3.select(chartRef2.current).selectAll("*").remove();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div ref={chartRef2}></div>;

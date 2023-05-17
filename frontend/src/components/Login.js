@@ -47,7 +47,7 @@ const Login = ({ setIsAuthenticated }) => {
         // Redirect to either the admin dashboard or the user dashboard.
 
         if (username === "admin") history.push("/admin");
-        else history.push("/userdashboard");
+        else history.push("/userdashboard", { username });
       })
       .catch((err) => {
         // Login form error handling.

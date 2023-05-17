@@ -5,7 +5,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Create from "./components/Create";
 import NotFound from "./components/NotFound";
-import Admin from "./components/Admin";
 import ProtectedRoute from "./ProtectedRoute";
 import { useState } from "react";
 import Userdashboard from "./components/Userdashboard";
@@ -48,13 +47,6 @@ function App() {
             path="/userdashboard"
             component={Userdashboard}
             isAuthenticated={isAuthenticated}
-          />
-
-          <ProtectedRoute
-            exact
-            path="/admin"
-            component={Admin}
-            isAuthenticated={isAuthenticated} 
           />
 
           <Route path="*">

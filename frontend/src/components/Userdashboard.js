@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import RatingFrequency from "./utils/RatingFrequency";
 import TagsFrequency from "./utils/TagsFrequency";
 import AdminCards from "./utils/AdminCards";
@@ -26,8 +27,9 @@ function Userdashboard() {
   const [contestSolves, setContestSolves] = useState("");
   const [wa, setWa] = useState("");
 
-  // #
-  const handle = "everule";
+  const location = useLocation();
+  const { username: handle } = location.state;
+
   useEffect(() => {
     // get user info
 
