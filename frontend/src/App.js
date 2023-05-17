@@ -9,17 +9,21 @@ import ProtectedRoute from "./ProtectedRoute";
 import { useState } from "react";
 import Userdashboard from "./components/Userdashboard";
 import Leaderboard from "./components/Leaderboard";
+import Admin from "./components/Admin";
 
 function App() {
   // isAuthenticated prevents unwanted redirects to home when the user is already logged in.
-  
+
   const [isAuthenticated, setIsAuthenticated] = useState(
     () => JSON.parse(localStorage.getItem("isAuthenticated")) ?? false
   );
 
   return (
     <Router>
-      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+      <Navbar
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
       <div className="App">
         <Switch>
           <Route exact path="/">
@@ -46,6 +50,13 @@ function App() {
             exact
             path="/userdashboard"
             component={Userdashboard}
+            isAuthenticated={isAuthenticated}
+          />
+
+          <ProtectedRoute
+            exact
+            path="/admin"
+            component={Admin}
             isAuthenticated={isAuthenticated}
           />
 

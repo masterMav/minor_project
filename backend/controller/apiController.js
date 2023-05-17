@@ -154,6 +154,53 @@ const getRanklist = async (req, res) => {
       // fetching errors.
 
       console.error(err);
+      res.json({ status: "error", error: "Internal server error." });
+    });
+};
+
+const assign = async (req, res) => {
+  // retrieve assignment
+
+  const { qn } = req.body;
+
+  // Update the "qns" array for all users
+
+  User.updateMany({}, { $push: { qns: qn } })
+    .then((result) => {
+      // updated successfully.
+
+      res.json({ status: "ok" });
+    })
+    .catch((error) => {
+      // updation errors
+
+      console.log(error);
+      res.json({ status: "error", error: "Internal server error." });
+    });
+};
+
+const admindata = async (req, res) => {
+  User.find({})
+    .then((users) => {
+      // fetched successfully.
+
+      let count = users.length,
+        avgRating = 0;
+      users.forEach((user) => {
+        if (user.rating !== undefined) avgRating += user.rating;
+      });
+
+      if (count !== 0) avgRating /= count;
+      let RoundedAvgRating = avgRating.toFixed(2);
+      const data = { count, RoundedAvgRating };
+
+      res.json({ status: "ok", data: data });
+    })
+    .catch((error) => {
+      // fetching errors
+
+      console.log(error);
+      res.json({ status: "error", error: "Internal server error." });
     });
 };
 
@@ -164,4 +211,6 @@ module.exports = {
   sendEmail,
   updateRank,
   getRanklist,
+  assign,
+  admindata,
 };

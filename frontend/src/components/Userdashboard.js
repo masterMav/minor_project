@@ -28,7 +28,11 @@ function Userdashboard() {
   const [wa, setWa] = useState("");
 
   const location = useLocation();
-  const { username: handle } = location.state;
+  let handle;
+  if (location.state) {
+    handle = location.state.username;
+    localStorage.setItem("handle", handle);
+  } else handle = localStorage.getItem("handle");
 
   useEffect(() => {
     // get user info

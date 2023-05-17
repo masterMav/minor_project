@@ -8,6 +8,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     // Clear localStorage
 
     localStorage.removeItem("token");
+    localStorage.removeItem("handle");
     localStorage.setItem("isAuthenticated", JSON.stringify(false));
     setIsAuthenticated(false);
 
