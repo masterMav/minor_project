@@ -19,8 +19,7 @@ function Userdashboard() {
   const [tagWise, setTagWise] = useState([]);
 
   // #
-  const handle = "mav";
-
+  const handle = "everule";
   useEffect(() => {
     // get user info
 
@@ -112,6 +111,8 @@ function Userdashboard() {
       {/* Main menu */}
 
       <div style={{ width: "80%" }}>
+        {/* Errors */}
+
         {error && (
           <div className="badge rounded-pill bg-danger" id="formError">
             {error}
@@ -120,15 +121,19 @@ function Userdashboard() {
 
         {/* Plot graphs */}
 
-        <div className="row justify-content-center">
-          <div className="col-5 text-center border rounded border-3 p-3 me-2">
-            <h2>Frequency Vs Ratings</h2>
-            {ratingWise.length !== 0 && <RatingFrequency data={ratingWise} />}
+        <div className="row justify-content-center mt-5">
+          <div className="col-5 text-center p-3 me-2 card custom-card">
+            <div class="card-body text-center">
+              <h2>Frequency Vs Ratings</h2>
+              {ratingWise.length !== 0 && <RatingFrequency data={ratingWise} />}
+            </div>
           </div>
 
-          <div className="col-5 text-center border rounded border-3 p-3">
-            <h2>Frequency Vs Tags</h2>
-            {tagWise.length !== 0 && <TagsFrequency data={tagWise}/>}
+          <div className="col-5 text-center p-3 card custom-card">
+            <div class="card-body text-center">
+              <h2>Frequency Vs Tags</h2>
+              {tagWise.length !== 0 && <TagsFrequency data={tagWise} />}
+            </div>
           </div>
         </div>
       </div>
