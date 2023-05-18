@@ -25,7 +25,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         <Link
           to={{
             pathname:
-              "https://docs.google.com/document/d/1eDYfXd1SPbv8zvQhn6-eF_qDwDQayZX_TvLl_Ttg_s4/edit?usp=sharing",
+              "https://drive.google.com/file/d/1kSMM6g2NahVwlGwQhU55HNjLKQKWSZrK/view?usp=sharing",
           }}
           target="_blank"
         >
